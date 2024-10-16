@@ -1,0 +1,25 @@
+<!-- app/templates/comments.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">All Comments</h2>
+    
+    {% if comments %}
+        <div class="list-group">
+            {% for comment in comments %}
+                <div class="list-group-item mb-3">
+                    <p class="mb-2">{{ comment.content }}</p>
+                    <small class="text-muted">
+                        By <strong>{{ comment.author.username }}</strong> on {{ comment.timestamp.strftime('%Y-%m-%d %H:%M') }}
+                        <br>
+                        On post: "<em>{{ comment.post.title }}</em>"
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No comments available.</p>
+    {% endif %}
+</div>
+{% endblock %}
