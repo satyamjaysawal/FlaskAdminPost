@@ -1,40 +1,40 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- # Yeh template "base.html" ko extend kar raha hai, iska matlab base template ke structure ko use kar raha hai -->
 
-{% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-            <h2 class="text-center mb-4">Login</h2>
-            <form method="POST" class="bg-light p-4 rounded shadow-sm">
-                {{ form.hidden_tag() }}
+{% block content %}  <!-- # "content" block define kar rahe hain jo base template mein jagah pe replace hoga -->
+<div class="container mt-5">  <!-- # Form ko center mein display karne ke liye container banaya -->
+    <div class="row justify-content-center">  <!-- # Row banayi jo content ko horizontally center kare -->
+        <div class="col-md-6 col-lg-4">  <!-- # Column define kiya, jo medium screen par 6 aur large par 4 width lega -->
+            <h2 class="text-center mb-4">Login</h2>  <!-- # Login ka heading -->
+            <form method="POST" class="bg-light p-4 rounded shadow-sm">  <!-- # Form define kiya, POST method use karte hue -->
+                {{ form.hidden_tag() }}  <!-- # CSRF protection ke liye hidden field jaha token store hota hai -->
 
                 <!-- Username Field -->
                 <div class="form-group">
-                    {{ form.username.label(class="form-label") }}
-                    {{ form.username(class="form-control", placeholder="Enter your username") }}
+                    {{ form.username.label(class="form-label") }}  <!-- # Username label ke liye Flask form ka field -->
+                    {{ form.username(class="form-control", placeholder="Enter your username") }}  <!-- # Username input field, jisme placeholder hai -->
                 </div>
 
                 <!-- Password Field with Eye Toggle -->
                 <div class="form-group">
-                    {{ form.password.label(class="form-label") }}
-                    <div class="input-group">
-                        {{ form.password(class="form-control", id="passwordInput", placeholder="Enter your password") }}
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" id="togglePassword">
-                                <i class="fa fa-eye" id="eyeIcon"></i>
+                    {{ form.password.label(class="form-label") }}  <!-- # Password label ke liye Flask form ka field -->
+                    <div class="input-group">  <!-- # Password input aur button ke liye ek group banaya -->
+                        {{ form.password(class="form-control", id="passwordInput", placeholder="Enter your password") }}  <!-- # Password input field, jisme placeholder aur ID set hai -->
+                        <div class="input-group-append">  <!-- # Button add kiya password ke bagal mein -->
+                            <button type="button" class="btn btn-outline-secondary" id="togglePassword">  <!-- # Button jisse password dikhne ya chhupne lagega -->
+                                <i class="fa fa-eye" id="eyeIcon"></i>  <!-- # Eye icon jo password visibility ke liye hai -->
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Remember Me Checkbox -->
-                <div class="form-group form-check">
-                    {{ form.remember(class="form-check-input") }}
-                    {{ form.remember.label(class="form-check-label") }}
+                <div class="form-group form-check">  
+                    {{ form.remember(class="form-check-input") }}  <!-- # Checkbox field for "Remember Me" -->
+                    {{ form.remember.label(class="form-check-label") }}  <!-- # Checkbox ka label -->
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>  <!-- # Form submit karne ke liye button -->
             </form>
         </div>
     </div>
@@ -42,23 +42,24 @@
 
 <!-- JavaScript for Toggle Password Visibility -->
 <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordInput = document.querySelector('#passwordInput');
-    const eyeIcon = document.querySelector('#eyeIcon');
+    const togglePassword = document.querySelector('#togglePassword');  // # Password toggle button ko select kar rahe hain
+    const passwordInput = document.querySelector('#passwordInput');  // # Password input field ko select kiya
+    const eyeIcon = document.querySelector('#eyeIcon');  // # Eye icon ko select kiya
 
-    togglePassword.addEventListener('click', function () {
+    togglePassword.addEventListener('click', function () {  // # Jab button click hoga tab ye function chalega
         // Toggle the type attribute
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';  
+        // # Agar type "password" hai toh "text" kar denge, aur agar "text" hai toh "password" kar denge
+        passwordInput.setAttribute('type', type);  // # Password input ka type set kar rahe hain
+        
         // Toggle the eye icon
-        if (type === 'text') {
-            eyeIcon.classList.remove('fa-eye');
-            eyeIcon.classList.add('fa-eye-slash');
-        } else {
-            eyeIcon.classList.remove('fa-eye-slash');
-            eyeIcon.classList.add('fa-eye');
+        if (type === 'text') {  // # Agar password dikh raha hai toh icon ko "eye-slash" banayenge
+            eyeIcon.classList.remove('fa-eye');  // # Eye icon remove kar rahe hain
+            eyeIcon.classList.add('fa-eye-slash');  // # Eye-slash icon add kar rahe hain
+        } else {  // # Agar password chhupa hai toh icon ko "eye" banayenge
+            eyeIcon.classList.remove('fa-eye-slash');  // # Eye-slash icon remove kar rahe hain
+            eyeIcon.classList.add('fa-eye');  // # Eye icon add kar rahe hain
         }
     });
-</script>
-{% endblock %}
+</script>  <!-- # JavaScript end -->
+{% endblock %}  <!-- # content block close kar rahe hain -->
